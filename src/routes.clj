@@ -12,5 +12,6 @@
     (coast/api
       (coast/with-prefix "/api"
         [:get "/" :api.home/index]
+        [:get "/products" :api.products/index]
         [:post "/products" :api.products/create]
-        [:get "/products" :api.products/index]))))
+        [:get "/products/:product-id" :api.products/view]))))

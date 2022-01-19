@@ -19,3 +19,13 @@
     (if (nil? product)
       (coast/not-found {:message "not found"})
       {:status "ok" :data product})))
+
+(defn change
+  [request]
+  (let [product (coast/fetch :product (-> request :params :product-id))
+        [result errors] (->
+                         (select-keys product [:product/id])
+                         (merge (:body request))
+                         (coast/update)
+                         (coast/rescue))]
+    {:status "ok" :data result}))

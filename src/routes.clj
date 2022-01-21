@@ -15,4 +15,5 @@
       [:get "/products" :api.products/index]
       [:post "/products" :api.products/create]
       [:get "/products/:product-id" :api.products/view]
-      [:put "/products/:product-id" :api.products/change]))))
+      [:put "/products/:product-id" :api.products/change]
+      [:delete "/products/:product-id" :api.products/delete]))))

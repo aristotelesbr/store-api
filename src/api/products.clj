@@ -23,9 +23,18 @@
 (defn change
   [request]
   (let [product (coast/fetch :product (-> request :params :product-id))
-        [result errors] (->
-                         (select-keys product [:product/id])
-                         (merge (:body request))
-                         (coast/update)
-                         (coast/rescue))]
+        [result _errors] (->
+                          (select-keys product [:product/id])
+                          (merge (:body request))
+                          (coast/update)
+                          (coast/rescue))]
     {:status "ok" :data result}))
+
+(defn delete
+  [request]
+  (let [_ (-> (coast/fetch :product (-> request :params :product-id))
+                       (coast/delete)
+                       (coast/rescue))]
+  {:status 204
+   :body ""
+   :headers {}}))
